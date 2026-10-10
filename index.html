@@ -170,6 +170,21 @@ footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:cent
 .ig{display:inline-flex;align-items:center;gap:10px;direction:ltr;border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 16px;font-family:var(--f-mark);font-weight:600;letter-spacing:.3px}
 .ig button{font-family:var(--f-fa);font-size:13px;font-weight:500;background:var(--ink-2);color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
 .fine{font-size:12px;color:var(--muted);margin:0}
+.visit{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px 14px;text-align:right;padding:18px;border-radius:20px;margin-bottom:10px;
+  background:linear-gradient(160deg,var(--ink-3),var(--ink-2));border:1px solid var(--line);position:relative;overflow:hidden}
+.visit::before{content:"";position:absolute;width:180px;height:180px;left:-60px;top:-80px;border-radius:50%;background:radial-gradient(circle,rgba(220,187,128,.14),rgba(220,187,128,0) 70%);pointer-events:none}
+.visit-pin{position:relative;width:52px;height:52px;border-radius:50%;background:var(--gold);display:grid;place-items:center}
+.visit-pin::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+.visit-pin svg{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.visit-txt{min-width:0;display:grid;gap:0}
+.visit-en{font-family:var(--f-serif);font-style:italic;color:var(--gold);font-size:17px;direction:ltr;text-align:right;line-height:1.2}
+.visit h2{margin:0;font-size:18px;font-weight:800;line-height:1.5}
+.visit p{margin:0;font-size:13px;color:var(--muted)}
+.visit-btn{grid-column:1/-1;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:14px;
+  background:var(--gold);color:var(--ink);font-weight:800;font-size:15px;text-decoration:none;transition:transform .3s var(--ease),box-shadow .3s}
+.visit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(220,187,128,.7)}
+.visit-btn svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -235,6 +250,20 @@ footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:cent
   <p class="empty" id="empty" hidden>چیزی پیدا نشد. یک کلمه‌ی دیگر امتحان کن.</p>
 
   <footer>
+    <section class="visit" aria-labelledby="visitH">
+      <div class="visit-pin" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+      </div>
+      <div class="visit-txt">
+        <span class="visit-en">Find Us</span>
+        <h2 id="visitH">کافه اُلا · رضوانشهر</h2>
+        <p>منتظر دیدنتان هستیم</p>
+      </div>
+      <a class="visit-btn" href="https://nshn.ir/897bLdg65BsMLZ" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg>
+        مسیریابی با نشان
+      </a>
+    </section>
     <div class="ig"><span id="igh">@ola__cafee</span><button id="copy" type="button">کپی آیدی</button></div>
     <p class="fine">اینستاگرام اُلا را دنبال کنید · Good Coffee, Good Mood</p>
     <p class="fine" id="updated"></p>
