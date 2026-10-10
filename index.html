@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c1020">
+<meta name="description" content="منوی دیجیتال کافه اُلا، رضوانشهر · Good Food Good Mood">
+<meta property="og:title" content="منوی کافه اُلا">
+<meta property="og:description" content="Good Food · Good Mood">
+<title>منوی کافه اُلا | Ola Cafe</title>
+<link rel="preload" href="assets/fonts/Vazirmatn-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/urbanist-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* All fonts are self-hosted: the menu makes no requests to any other server. */
+@font-face{font-family:"Vazirmatn";font-weight:300;font-display:swap;src:url(assets/fonts/Vazirmatn-Light.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:400;font-display:swap;src:url(assets/fonts/Vazirmatn-Regular.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:500;font-display:swap;src:url(assets/fonts/Vazirmatn-Medium.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:700;font-display:swap;src:url(assets/fonts/Vazirmatn-Bold.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:800;font-display:swap;src:url(assets/fonts/Vazirmatn-ExtraBold.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
+@font-face{font-family:"Urbanist";font-weight:600;font-display:swap;src:url(assets/fonts/urbanist-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Urbanist";font-weight:700;font-display:swap;src:url(assets/fonts/urbanist-latin-700-normal.woff2) format("woff2")}
+
+/* Layout: one candle-lit column. Splash → hero (logo, steam, ribbon) → search & mood → sticky chapter bar → chapters → footer. */
+:root{
+  --ink:#0c1020;          /* midnight navy, from the logo's blue */
+  --ink-2:#141a31;
+  --ink-3:#1b2240;
+  --line:#2a3152;
+  --paper:#cdc5d8;        /* lilac-grey of the printed menu */
+  --fg:#eeeaf4;
+  --muted:#9a94b0;
+  --gold:#dcbb80;
+  --gold-deep:#a9864c;
+  --f-fa:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;
+  --f-serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --f-mark:"Urbanist","Avenir Next","Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--f-fa);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.locked{overflow:hidden}
+.wrap{max-width:620px;margin:0 auto;padding-inline:18px;padding-block:0 60px;position:relative}
+::selection{background:var(--gold);color:var(--ink)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+button{font:inherit;color:inherit}
+
+/* ---------- ambient ---------- */
+#aura{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:1;opacity:0;transition:opacity .4s;
+  background:radial-gradient(circle,rgba(220,187,128,.10),rgba(220,187,128,0) 65%);translate:-50% -50%}
+main,header,footer,section{position:relative;z-index:2}
+
+/* ---------- splash ---------- */
+.splash{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;transition:clip-path 1s cubic-bezier(.7,0,.2,1);clip-path:circle(150% at 50% 45%)}
+.splash.out{clip-path:circle(0% at 50% 45%)}
+.splash svg{width:min(210px,56vw);overflow:visible}
+.splash .w{font-family:var(--f-mark);font-weight:700;font-size:118px;letter-spacing:-6px;fill:var(--paper);animation:rise .9s var(--ease) both}
+.splash .s{fill:none;stroke:var(--gold);stroke-width:13;stroke-linecap:round;stroke-dasharray:260;animation:draw 1.1s .35s cubic-bezier(.65,0,.35,1) both}
+.splash .c{font-family:var(--f-mark);font-weight:600;font-size:22px;letter-spacing:9px;fill:var(--gold);animation:rise .8s 1s var(--ease) both}
+.splash p{position:absolute;bottom:calc(36px + env(safe-area-inset-bottom,0px));margin:0;font-size:12px;color:var(--muted);letter-spacing:.5px;animation:fade 1s 1.2s both}
+
+/* ---------- hero ---------- */
+.hero{padding-block:44px 8px;text-align:center;display:grid;justify-items:center;gap:8px}
+.mark{width:min(232px,62vw);height:auto;overflow:visible}
+.mark .word{font-family:var(--f-mark);font-weight:700;font-size:118px;letter-spacing:-6px;fill:var(--paper)}
+.mark .smile{fill:none;stroke:var(--paper);stroke-width:13;stroke-linecap:round;stroke-dasharray:260;transform-origin:110px 150px;transform-box:view-box}
+.mark .cafe{font-family:var(--f-mark);font-weight:600;font-size:22px;letter-spacing:9px;fill:var(--gold)}
+body.ready .mark .word{animation:rise 1s var(--ease) both}
+body.ready .mark .smile{animation:draw 1.4s .25s cubic-bezier(.65,0,.35,1) both, grin 6s 3s ease-in-out infinite}
+body.ready .mark .cafe{animation:rise .9s .9s var(--ease) both}
+@keyframes draw{from{stroke-dashoffset:260}to{stroke-dashoffset:0}}
+@keyframes grin{0%,86%,100%{transform:scaleY(1)}91%{transform:scaleY(1.2) translateY(2px)}}
+@keyframes rise{from{transform:translateY(16px);opacity:.0001}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.tagline{font-family:var(--f-serif);font-style:italic;font-size:23px;color:var(--gold);margin:0;display:flex;gap:.35em;justify-content:center;flex-wrap:wrap}
+.tagline span{display:inline-block}
+body.ready .tagline span{animation:rise .9s var(--ease) both}
+.hero-fa{margin:0;color:var(--muted);font-size:14px}
+.hero-fa b{color:var(--fg);font-weight:500}
+
+/* steaming cup */
+.cup-wrap{position:relative;width:86px;height:92px;margin-top:6px}
+.cup-wrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cup-body{fill:none;stroke:var(--paper);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.steam{fill:none;stroke:var(--gold);stroke-width:2.6;stroke-linecap:round;opacity:0;animation:steam 3.4s ease-in-out infinite}
+.steam.b{animation-delay:1.1s}.steam.c{animation-delay:2.2s}
+@keyframes steam{0%{opacity:0;transform:translateY(10px) scaleY(.7)}25%{opacity:.85}70%{opacity:.35}100%{opacity:0;transform:translateY(-16px) scaleY(1.1)}}
+
+/* ribbon */
+.ribbon{margin-block:22px 4px;margin-inline:-18px;overflow:hidden;border-block:1px solid var(--line);direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ribbon-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.ribbon span{font-family:var(--f-serif);font-style:italic;font-size:18px;color:var(--paper);padding:8px 18px;white-space:nowrap;display:flex;align-items:center;gap:18px}
+.ribbon span::after{content:"";width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- tools ---------- */
+.tools{display:grid;gap:14px;margin-block:26px 4px}
+.search{position:relative}
+.search input{width:100%;background:var(--ink-2);border:1px solid var(--line);color:var(--fg);font:inherit;font-size:15px;border-radius:999px;padding:12px 46px 12px 18px;transition:border-color .3s,box-shadow .3s}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 4px rgba(220,187,128,.12)}
+.search svg{position:absolute;right:17px;top:50%;translate:0 -50%;width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;pointer-events:none}
+.mood-q{font-size:13px;color:var(--muted);margin:0 0 8px}
+.mood-row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-block:2px 6px}
+.mood-row::-webkit-scrollbar{display:none}
+.mood-row button{flex:none;font-size:14px;background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;transition:all .35s var(--ease)}
+.mood-row button:hover{border-color:var(--gold-deep)}
+.mood-row button[aria-pressed="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;transform:translateY(-1px);box-shadow:0 6px 20px -8px rgba(220,187,128,.7)}
+
+/* ---------- chapter bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-18px;padding:10px 18px;background:linear-gradient(var(--ink) 72%,rgba(12,16,32,0))}
+.chips{position:relative;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;color:var(--muted);text-decoration:none;font-size:14px;padding:6px 12px;border-radius:999px;transition:color .3s;white-space:nowrap;position:relative;z-index:1}
+.chips a.on{color:var(--ink);font-weight:700}
+.pill{position:absolute;top:0;height:calc(100% - 6px);background:var(--gold);border-radius:999px;transition:left .5s cubic-bezier(.3,1.3,.5,1),width .5s cubic-bezier(.3,1.3,.5,1);z-index:0}
+
+/* ---------- chapters ---------- */
+.unit{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 0}
+.chapter{padding-block:36px 6px;scroll-margin-top:66px}
+.ch-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:6px 14px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:10px;position:relative}
+.ch-head::after{content:"";position:absolute;bottom:-1px;right:0;height:1px;width:0;background:var(--gold);transition:width 1.4s var(--ease)}
+.chapter.seen .ch-head::after{width:42%}
+.ch-fa{font-size:25px;font-weight:800;margin:0;line-height:1.2;text-wrap:balance}
+.ch-en{direction:ltr;font-family:var(--f-serif);font-style:italic;font-weight:500;font-size:30px;line-height:1;
+  background:linear-gradient(100deg,var(--gold-deep) 0%,var(--gold) 35%,#fff3d8 50%,var(--gold) 65%,var(--gold-deep) 100%);background-size:250% 100%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.chapter.seen .ch-en{animation:shine 2.4s .1s ease-out both}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
+.ch-note{grid-column:1/-1;font-size:13px;color:var(--muted);margin:0}
+
+.items{list-style:none;margin:0;padding:0;display:grid}
+.item{position:relative;display:grid;grid-template-columns:minmax(0,auto) 1fr auto;align-items:baseline;gap:10px;padding:13px 6px;border-radius:12px;overflow:hidden;transition:background .35s,transform .7s var(--ease),opacity .7s var(--ease)}
+.item:hover{background:rgba(205,197,216,.04)}
+.js .chapter:not(.seen) .item{transform:translateY(18px);opacity:.25}
+.chapter.seen .item{transition-delay:calc(var(--i) * 60ms)}
+.name{min-width:0;font-size:17px;font-weight:500}
+.name small{display:block;font-size:12.5px;color:var(--muted);font-weight:400;line-height:1.6;margin-top:2px}
+.dots{border-bottom:1px dotted rgba(220,187,128,.35);transform:translateY(-6px);min-width:18px}
+.price{font-size:18px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.price.ask{font-size:13px;font-weight:400;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--ink);background:var(--gold);padding:0 8px;border-radius:999px;margin-inline-start:6px;vertical-align:2px}
+.soldout{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);border:1px solid var(--gold-deep);padding:0 8px;border-radius:999px;margin-inline-start:6px;vertical-align:2px}
+.item.off .name,.item.off .price{opacity:.4}
+.item.off .price{text-decoration:line-through;text-decoration-thickness:1px}
+.item.dim{opacity:.22!important}
+.item.pick{background:rgba(220,187,128,.08)}
+.item.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%,40%{background:rgba(220,187,128,.22)}100%{background:transparent}}
+.item.pick::before{content:"";position:absolute;right:0;top:12px;bottom:12px;width:2px;background:var(--gold);border-radius:2px}
+.ripple{position:absolute;border-radius:50%;background:rgba(220,187,128,.25);transform:scale(0);animation:rip .7s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.empty{text-align:center;color:var(--muted);padding:40px 0}
+
+/* ---------- top button ---------- */
+.top{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;width:50px;height:50px;border-radius:50%;border:0;background:var(--ink-3);cursor:pointer;display:grid;place-items:center;box-shadow:0 10px 26px -10px rgba(0,0,0,.7);opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .4s,transform .4s var(--ease)}
+.top.show{opacity:1;transform:none;pointer-events:auto}
+.top svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.top circle{fill:none;stroke-width:2.5}
+.top .bg{stroke:var(--line)}
+.top .fg{stroke:var(--gold);stroke-dasharray:138.2;stroke-linecap:round}
+.top i{width:10px;height:10px;border-left:2px solid var(--gold);border-top:2px solid var(--gold);transform:translateY(2px) rotate(45deg)}
+
+/* ---------- footer ---------- */
+footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:center;gap:14px}
+.ig{display:inline-flex;align-items:center;gap:10px;direction:ltr;border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 16px;font-family:var(--f-mark);font-weight:600;letter-spacing:.3px}
+.ig button{font-family:var(--f-fa);font-size:13px;font-weight:500;background:var(--ink-2);color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer}
+.fine{font-size:12px;color:var(--muted);margin:0}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .chapter:not(.seen) .item{transform:none;opacity:1}
+  .splash{display:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js")</script>
+<div class="splash" id="splash" aria-hidden="true">
+  <svg viewBox="0 0 220 200"><text class="w" x="110" y="112" text-anchor="middle" direction="ltr">Ola</text><path class="s" d="M44 132 Q110 196 176 132"/><text class="c" x="160" y="196" text-anchor="middle" direction="ltr">CAFE</text></svg>
+  <p>Good Food · Good Mood</p>
+</div>
+
+<canvas id="aura" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <svg class="mark" viewBox="0 0 220 200" role="img" aria-label="Ola Cafe">
+      <text class="word" x="110" y="112" text-anchor="middle" direction="ltr">Ola</text>
+      <path class="smile" d="M44 132 Q110 196 176 132"/>
+      <text class="cafe" x="160" y="196" text-anchor="middle" direction="ltr">CAFE</text>
+    </svg>
+    <p class="tagline" dir="ltr" aria-label="Good Food Good Mood">
+      <span style="animation-delay:1.1s">Good</span><span style="animation-delay:1.22s">Food</span><span style="animation-delay:1.36s">·</span><span style="animation-delay:1.5s">Good</span><span style="animation-delay:1.62s">Mood</span>
+    </p>
+    <p class="hero-fa">کافه اُلا · <b>رضوانشهر</b></p>
+    <div class="cup-wrap" aria-hidden="true">
+      <svg viewBox="0 0 86 92">
+        <path class="steam a" d="M30 34 C24 26 36 20 30 10"/>
+        <path class="steam b" d="M43 34 C37 26 49 20 43 8"/>
+        <path class="steam c" d="M56 34 C50 26 62 20 56 10"/>
+        <path class="cup-body" d="M16 44 H70 V58 A24 24 0 0 1 46 82 H40 A24 24 0 0 1 16 58 Z"/>
+        <path class="cup-body" d="M70 50 H75 A8 8 0 0 1 75 66 H68"/>
+        <path class="cup-body" d="M10 88 H76"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="ribbon" aria-hidden="true"><div class="ribbon-track" id="ribbon"></div></div>
+
+
+  <section class="tools" aria-label="جستجو و پیشنهاد">
+    <div class="search">
+      <input id="q" type="search" placeholder="جستجو در منو… مثلاً لاته" autocomplete="off" aria-label="جستجو در منو">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    </div>
+    <div>
+      <p class="mood-q">امروز چی دلت می‌خواد؟</p>
+      <div class="mood-row" id="moods"></div>
+    </div>
+  </section>
+
+  <nav class="bar" aria-label="دسته‌های منو">
+    <div class="chips" id="chips"><span class="pill" id="pill"></span></div>
+  </nav>
+  <p class="unit">قیمت‌ها به هزار تومان است</p>
+
+  <main id="menu"></main>
+  <p class="empty" id="empty" hidden>چیزی پیدا نشد. یک کلمه‌ی دیگر امتحان کن.</p>
+
+  <footer>
+    <div class="ig"><span id="igh">@ola__cafee</span><button id="copy" type="button">کپی آیدی</button></div>
+    <p class="fine">اینستاگرام اُلا را دنبال کنید · Good Food Good Mood</p>
+    <p class="fine" id="updated"></p>
+  </footer>
+</div>
+
+<button class="top" id="top" type="button" aria-label="بازگشت به بالا">
+  <svg viewBox="0 0 50 50" aria-hidden="true"><circle class="bg" cx="25" cy="25" r="22"/><circle class="fg" id="ring" cx="25" cy="25" r="22"/></svg>
+  <i></i>
+</button>
+
+<script>
+/* ===== Menu data =====
+   Prices live in menu.json. To change a price: edit menu.json on GitHub (pencil icon) and commit.
+   FALLBACK is used only if menu.json can't be loaded. */
+const FALLBACK = {"updated": "2026-10-10T06:08:38.474Z", "categories": [{"id": "hot", "fa": "قهوه گرم", "en": "Coffee · Hot", "note": "", "items": [{"n": "اسپرسو روبوستا", "d": "", "p": 130, "tag": "", "m": ["energy"], "off": false}, {"n": "اسپرسو عربیکا", "d": "ترکیب ۵۰/۵۰", "p": 155, "tag": "", "m": ["energy"], "off": false}, {"n": "آمریکانو", "d": "", "p": 145, "tag": "", "m": ["energy"], "off": false}, {"n": "لاته", "d": "", "p": 210, "tag": "", "m": ["calm"], "off": false}, {"n": "کورتادو", "d": "", "p": 180, "tag": "", "m": ["energy"], "off": false}, {"n": "موکا", "d": "", "p": 245, "tag": "", "m": ["sweet"], "off": false}, {"n": "کارامل ماکیاتو", "d": "", "p": 245, "tag": "", "m": ["sweet"], "off": false}, {"n": "کاپوچینو", "d": "", "p": 210, "tag": "", "m": ["calm"], "off": false}]}, {"id": "iced", "fa": "قهوه سرد", "en": "Coffee · Iced", "note": "", "items": [{"n": "آیس آمریکانو", "d": "", "p": 160, "tag": "", "m": ["energy", "cool"], "off": false}, {"n": "آیس لاته", "d": "", "p": 230, "tag": "", "m": ["cool"], "off": false}, {"n": "آیس کارامل ماکیاتو", "d": "", "p": 265, "tag": "", "m": ["cool", "sweet"], "off": false}, {"n": "آیس موکا", "d": "", "p": 265, "tag": "", "m": ["cool", "sweet"], "off": false}, {"n": "آفوگاتو", "d": "اسپرسو روی بستنی", "p": 290, "tag": "", "m": ["sweet", "energy"], "off": false}]}, {"id": "drinks", "fa": "نوشیدنی گرم", "en": "Hot Drinks", "note": "", "items": [{"n": "هات چاکلت", "d": "", "p": 210, "tag": "", "m": ["sweet", "calm"], "off": false}, {"n": "چای ماسالا", "d": "", "p": 190, "tag": "", "m": ["calm"], "off": false}, {"n": "چای کَرَک", "d": "", "p": 195, "tag": "", "m": ["calm"], "off": false}, {"n": "چای سیاه", "d": "", "p": 95, "tag": "", "m": ["calm"], "off": false}, {"n": "اُلا پسته", "d": "", "p": 290, "tag": "", "m": ["sweet"], "off": false}, {"n": "دمنوش سیوان", "d": "سیب، دارچین، به", "p": 180, "tag": "", "m": ["calm"], "off": false}, {"n": "دمنوش پالیزان", "d": "سیب، به، پرتقال", "p": 180, "tag": "", "m": ["calm"], "off": false}, {"n": "دمنوش ماهین", "d": "سیب، به، بهارنارنج، هل، گل محمدی، به‌لیمو", "p": 190, "tag": "", "m": ["calm"], "off": false}]}, {"id": "shake", "fa": "میلک‌شیک", "en": "Milkshakes", "note": "", "items": [{"n": "شکلات", "d": "", "p": 285, "tag": "", "m": ["sweet", "cool"], "off": false}, {"n": "نوتلا", "d": "", "p": 395, "tag": "", "m": ["sweet", "cool"], "off": false}, {"n": "لوتوس", "d": "", "p": 375, "tag": "", "m": ["sweet", "cool"], "off": false}, {"n": "اورئو", "d": "", "p": 370, "tag": "", "m": ["sweet", "cool"], "off": false}, {"n": "توت‌فرنگی", "d": "", "p": 370, "tag": "", "m": ["sweet", "cool"], "off": false}, {"n": "بادام‌زمینی", "d": "", "p": 385, "tag": "", "m": ["sweet", "cool"], "off": false}]}, {"id": "frappe", "fa": "فراپه", "en": "Frappé", "note": "", "items": [{"n": "شکلات", "d": "", "p": 350, "tag": "", "m": ["cool", "sweet"], "off": false}, {"n": "کارامل", "d": "", "p": 350, "tag": "", "m": ["cool", "sweet"], "off": false}, {"n": "توت‌فرنگی", "d": "", "p": 370, "tag": "", "m": ["cool", "sweet"], "off": false}]}, {"id": "mock", "fa": "ماکتیل", "en": "Mocktails", "note": "", "items": [{"n": "موهیتو", "d": "", "p": 230, "tag": "", "m": ["cool"], "off": false}, {"n": "رد موهیتو", "d": "", "p": 245, "tag": "", "m": ["cool"], "off": false}, {"n": "لیموناد", "d": "", "p": 215, "tag": "", "m": ["cool"], "off": false}, {"n": "بلوهاوایی", "d": "", "p": 260, "tag": "", "m": ["cool"], "off": false}, {"n": "رُزِلا", "d": "", "p": 245, "tag": "", "m": ["cool"], "off": false}]}, {"id": "food", "fa": "پنینی و اسنک", "en": "Panini & Snack", "note": "", "items": [{"n": "پنینی مرغ اسپایسی", "d": "", "p": 390, "tag": "", "m": ["hungry"], "off": false}, {"n": "پنینی پپرونی", "d": "", "p": 320, "tag": "", "m": ["hungry"], "off": false}, {"n": "اسنک ژامبون و پنیر", "d": "", "p": 230, "tag": "", "m": ["hungry"], "off": false}]}, {"id": "fries", "fa": "سیب‌زمینی", "en": "Fries", "note": "", "items": [{"n": "سیب‌زمینی ساده", "d": "", "p": 337, "tag": "", "m": ["hungry"], "off": false}, {"n": "سیب‌زمینی ویژه اُلا", "d": "", "p": 445, "tag": "", "m": ["hungry"], "off": false}]}, {"id": "waffle", "fa": "وافل", "en": "Waffles", "note": "", "items": [{"n": "وافل میوه‌ای", "d": "", "p": 320, "tag": "", "m": ["sweet"], "off": false}, {"n": "وافل میوه‌ای با بستنی", "d": "", "p": 410, "tag": "", "m": ["sweet"], "off": false}]}, {"id": "dessert", "fa": "دسر", "en": "Desserts", "note": "قیمت روز را از باریستا بپرسید", "items": [{"n": "کیک روز", "d": "", "p": null, "tag": "", "m": ["sweet"], "off": false}, {"n": "کوکی", "d": "", "p": null, "tag": "", "m": ["sweet"], "off": false}, {"n": "تیرامیسو", "d": "", "p": null, "tag": "", "m": ["sweet", "energy"], "off": false}]}, {"id": "top", "fa": "افزودنی", "en": "Toppings", "note": "", "items": [{"n": "سیروپ", "d": "", "p": 50, "tag": "", "m": [], "off": false}, {"n": "خامه", "d": "", "p": 70, "tag": "", "m": [], "off": false}, {"n": "بستنی", "d": "", "p": 90, "tag": "", "m": [], "off": false}]}]};
+const MOODS = [
+  {k:"energy", t:"پرانرژی"},
+  {k:"calm",   t:"آرام و دنج"},
+  {k:"sweet",  t:"شیرین"},
+  {k:"cool",   t:"خنک"},
+  {k:"hungry", t:"گرسنه"},
+];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fa = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = id => document.getElementById(id);
+const menu = $("menu"), chips = $("chips"), pill = $("pill");
+let MENU = [], links = [], current = "";
+
+/* ===== splash ===== */
+(() => {
+  const sp = $("splash");
+  let seen = false; try { seen = sessionStorage.getItem("ola-splash") === "1"; } catch (e) {}
+  const done = () => { sp.classList.add("out"); document.body.classList.remove("locked"); document.body.classList.add("ready"); setTimeout(() => sp.remove(), 1100); try { sessionStorage.setItem("ola-splash", "1"); } catch (e) {} };
+  if (reduce || seen) { sp.remove(); document.body.classList.add("ready"); return; }
+  document.body.classList.add("locked");
+  sp.addEventListener("click", done, {once:true});
+  setTimeout(done, 2000);
+})();
+
+/* ===== ribbon ===== */
+$("ribbon").innerHTML = Array(2).fill(["Good Food", "Good Mood", "Ola Cafe", "Rezvanshahr", "Freshly Brewed"].map(t => `<span>${t}</span>`).join("")).join("");
+
+/* ===== render ===== */
+function render(data){
+  MENU = (data.categories || []).filter(c => c.items && c.items.length);
+  menu.innerHTML = MENU.map(c => `
+  <section class="chapter" id="${esc(c.id)}" aria-labelledby="h-${esc(c.id)}">
+    <div class="ch-head">
+      <h2 class="ch-fa" id="h-${esc(c.id)}">${esc(c.fa)}</h2>
+      <span class="ch-en" aria-hidden="true">${esc(c.en)}</span>
+      ${c.note ? `<p class="ch-note">${esc(c.note)}</p>` : ""}
+    </div>
+    <ul class="items">
+      ${c.items.map((it, i) => `
+        <li class="item${it.off ? " off" : ""}" style="--i:${i}" data-m="${esc((it.m || []).join(" "))}" data-s="${esc(it.n)} ${esc(it.d)} ${esc(c.fa)}">
+          <span class="name">${esc(it.n)}${it.off ? `<span class="soldout">تمام شد</span>` : ""}${it.d ? `<small>${esc(it.d)}</small>` : ""}</span>
+          <span class="dots"></span>
+          ${it.p == null ? `<span class="price ask">قیمت روز</span>` : `<span class="price" data-v="${+it.p}">${fa(it.p)}</span>`}
+        </li>`).join("")}
+    </ul>
+  </section>`).join("");
+  chips.querySelectorAll("a").forEach(a => a.remove());
+  chips.insertAdjacentHTML("beforeend", MENU.map(c => `<a href="#${esc(c.id)}" data-id="${esc(c.id)}">${esc(c.fa)}</a>`).join(""));
+  links = [...chips.querySelectorAll("a")];
+  current = MENU[0] ? MENU[0].id : "";
+  document.querySelectorAll(".chapter").forEach(s => io.observe(s));
+  setActive(current);
+
+  if (data.updated) {
+    try { $("updated").textContent = "آخرین به‌روزرسانی قیمت‌ها: " + new Intl.DateTimeFormat("fa-IR", {year:"numeric", month:"long", day:"numeric"}).format(new Date(data.updated)); } catch (e) {}
+  }
+}
+
+/* ===== reveal + price count-up ===== */
+const countUp = el => {
+  const v = +el.dataset.v; if (!v || reduce) return;
+  const t0 = performance.now(), dur = 700;
+  const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fa(Math.round(v * e)); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+};
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add("seen"); io.unobserve(e.target);
+  e.target.querySelectorAll(".price[data-v]").forEach((p, i) => setTimeout(() => countUp(p), 120 + i * 60));
+}), {rootMargin:"0px 0px -10% 0px"});
+
+/* ===== chapter bar ===== */
+function setActive(id){
+  links.forEach(a => a.classList.toggle("on", a.dataset.id === id));
+  const a = links.find(l => l.dataset.id === id); if (!a) return;
+  pill.style.left = a.offsetLeft + "px"; pill.style.width = a.offsetWidth + "px";
+  const target = a.offsetLeft - (chips.clientWidth - a.offsetWidth) / 2;
+  if (Math.abs(chips.scrollLeft - target) > 4) chips.scrollTo({left: target, behavior: "smooth"});
+}
+const topBtn = $("top"), ring = $("ring");
+function onScroll(){
+  const max = document.documentElement.scrollHeight - innerHeight, k = max > 0 ? scrollY / max : 0;
+  ring.style.strokeDashoffset = 138.2 * (1 - k);
+  topBtn.classList.toggle("show", scrollY > 600);
+  if (!MENU.length) return;
+  let id = MENU[0].id;
+  for (const c of MENU) { const el = document.getElementById(c.id); if (el && el.offsetParent && el.getBoundingClientRect().top < 140) id = c.id; }
+  if (id !== current) { current = id; setActive(id); }
+}
+addEventListener("scroll", onScroll, {passive:true});
+addEventListener("resize", () => setActive(current));
+document.fonts && document.fonts.ready.then(() => setActive(current));
+topBtn.addEventListener("click", () => scrollTo({top:0, behavior: reduce ? "auto" : "smooth"}));
+
+
+/* ===== search ===== */
+const norm = s => s.replace(/[ي]/g, "ی").replace(/[ك]/g, "ک").replace(/[‌\s]+/g, " ").replace(/[ً-ْ]/g, "").trim().toLowerCase();
+const q = $("q"), empty = $("empty");
+q.addEventListener("input", () => {
+  const v = norm(q.value); let any = false;
+  document.querySelectorAll(".chapter").forEach(sec => {
+    let has = false;
+    sec.querySelectorAll(".item").forEach(li => { const ok = !v || norm(li.dataset.s).includes(v); li.hidden = !ok; has ||= ok; });
+    sec.hidden = !has; any ||= has;
+    if (has) sec.classList.add("seen");
+  });
+  empty.hidden = any;
+  links.forEach(a => a.hidden = document.getElementById(a.dataset.id).hidden);
+  setActive(current);
+});
+
+/* ===== mood picker ===== */
+$("moods").innerHTML = MOODS.map(m => `<button type="button" data-k="${m.k}" aria-pressed="false">${m.t}</button>`).join("");
+let mood = null;
+$("moods").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  mood = mood === b.dataset.k ? null : b.dataset.k;
+  document.querySelectorAll("#moods button").forEach(x => x.setAttribute("aria-pressed", x.dataset.k === mood));
+  let first = null;
+  document.querySelectorAll(".item").forEach(li => {
+    const hit = mood && li.dataset.m.split(" ").includes(mood);
+    li.classList.toggle("pick", !!hit); li.classList.toggle("dim", !!mood && !hit);
+    if (hit && !first) first = li;
+  });
+  document.querySelectorAll(".chapter").forEach(s => s.classList.add("seen"));
+  if (first) first.closest(".chapter").scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "start"});
+});
+
+/* ===== tap ripple ===== */
+menu.addEventListener("pointerdown", e => {
+  const li = e.target.closest(".item"); if (!li) return;
+  const r = li.getBoundingClientRect(), s = Math.max(r.width, r.height) * .5;
+  const d = document.createElement("span"); d.className = "ripple";
+  d.style.cssText = `width:${s}px;height:${s}px;left:${e.clientX - r.left - s / 2}px;top:${e.clientY - r.top - s / 2}px`;
+  li.appendChild(d); setTimeout(() => d.remove(), 750);
+});
+
+/* ===== desktop cursor glow ===== */
+if (matchMedia("(pointer:fine)").matches && !reduce) {
+  const g = $("glow");
+  addEventListener("pointermove", e => { g.style.left = e.clientX + "px"; g.style.top = e.clientY + "px"; g.style.opacity = 1; }, {passive:true});
+  document.addEventListener("pointerleave", () => g.style.opacity = 0);
+}
+
+/* ===== copy instagram id ===== */
+const copyBtn = $("copy");
+copyBtn.addEventListener("click", () => {
+  const done = () => { copyBtn.textContent = "کپی شد"; setTimeout(() => copyBtn.textContent = "کپی آیدی", 1600); };
+  const sel = () => { const r = document.createRange(); r.selectNodeContents($("igh")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  if (navigator.clipboard) navigator.clipboard.writeText("ola__cafee").then(done).catch(sel); else sel();
+});
+
+/* ===== ambient: warm motes and slow glows ===== */
+(() => {
+  const cv = $("aura"), cx = cv.getContext("2d");
+  let W, H, motes = [];
+  function size(){ const dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  size(); addEventListener("resize", size);
+  const spawn = init => ({x: Math.random() * W, y: init ? Math.random() * H : H + 20, r: Math.random() * 2.2 + .4, v: Math.random() * .35 + .12, a: Math.random() * .5 + .15, ph: Math.random() * 6.28, gold: Math.random() < .6});
+  for (let i = 0; i < Math.round(Math.min(48, W / 12)); i++) motes.push(spawn(true));
+  let t = 0, sy = 0; addEventListener("scroll", () => sy = scrollY, {passive:true});
+  function frame(){
+    t += .006; cx.clearRect(0, 0, W, H);
+    const g1 = cx.createRadialGradient(W * .75, H * .12 - sy * .08, 0, W * .75, H * .12 - sy * .08, W * .9);
+    g1.addColorStop(0, "rgba(220,187,128,.10)"); g1.addColorStop(1, "rgba(220,187,128,0)"); cx.fillStyle = g1; cx.fillRect(0, 0, W, H);
+    const g2 = cx.createRadialGradient(W * .15 + Math.sin(t) * 30, H * .85, 0, W * .15, H * .85, W * .8);
+    g2.addColorStop(0, "rgba(150,130,190,.10)"); g2.addColorStop(1, "rgba(150,130,190,0)"); cx.fillStyle = g2; cx.fillRect(0, 0, W, H);
+    for (const m of motes) {
+      m.y -= m.v; m.x += Math.sin(t * 3 + m.ph) * .25;
+      if (m.y < -20) Object.assign(m, spawn(false));
+      cx.beginPath(); cx.arc(m.x, m.y, m.r, 0, 6.283);
+      cx.fillStyle = m.gold ? `rgba(220,187,128,${m.a})` : `rgba(205,197,216,${m.a * .7})`; cx.fill();
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ===== boot: always fetch fresh prices ===== */
+fetch("menu.json?t=" + Date.now(), {cache: "no-store"})
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(render)
+  .catch(() => render(FALLBACK));
+</script>
+</body>
+</html>
