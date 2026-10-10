@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c1020">
-<meta name="description" content="منوی دیجیتال کافه اُلا، رضوانشهر · Good Food Good Mood">
+<meta name="description" content="منوی دیجیتال کافه اُلا، رضوانشهر · Good Coffee, Good Mood">
 <meta property="og:title" content="منوی کافه اُلا">
-<meta property="og:description" content="Good Food · Good Mood">
+<meta property="og:description" content="Good Coffee, Good Mood">
 <title>منوی کافه اُلا | Ola Cafe</title>
 <style>
 /* All fonts are self-hosted: the menu makes no requests to any other server. */
@@ -78,6 +78,7 @@ body.ready .mark .cafe{animation:rise .9s .9s var(--ease) both}
 
 .tagline{font-family:var(--f-serif);font-style:italic;font-size:23px;color:var(--gold);margin:0;display:flex;gap:.35em;justify-content:center;flex-wrap:wrap}
 .tagline span{display:inline-block}
+.tagline .t-ola{font-family:var(--f-mark);font-style:normal;font-weight:700;color:var(--paper);letter-spacing:-.5px;font-size:.92em}
 body.ready .tagline span{animation:rise .9s var(--ease) both}
 .hero-fa{margin:0;color:var(--muted);font-size:14px}
 .hero-fa b{color:var(--fg);font-weight:500}
@@ -181,7 +182,7 @@ footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:cent
 <script>document.documentElement.classList.add("js")</script>
 <div class="splash" id="splash" aria-hidden="true">
   <svg viewBox="0 0 220 200"><text class="w" x="110" y="112" text-anchor="middle" direction="ltr">Ola</text><path class="s" d="M44 132 Q110 196 176 132"/><text class="c" x="160" y="196" text-anchor="middle" direction="ltr">CAFE</text></svg>
-  <p>Good Food · Good Mood</p>
+  <p>Good Coffee, Good Mood</p>
 </div>
 
 <canvas id="aura" aria-hidden="true"></canvas>
@@ -195,8 +196,8 @@ footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:cent
       <path class="smile" d="M44 132 Q110 196 176 132"/>
       <text class="cafe" x="160" y="196" text-anchor="middle" direction="ltr">CAFE</text>
     </svg>
-    <p class="tagline" dir="ltr" aria-label="Good Food Good Mood">
-      <span style="animation-delay:1.1s">Good</span><span style="animation-delay:1.22s">Food</span><span style="animation-delay:1.36s">·</span><span style="animation-delay:1.5s">Good</span><span style="animation-delay:1.62s">Mood</span>
+    <p class="tagline" dir="ltr" aria-label="Good Coffee, Good Mood">
+      <span style="animation-delay:1.1s">Good</span><span style="animation-delay:1.24s">Coffee,</span><span style="animation-delay:1.42s">Good</span><span style="animation-delay:1.56s">Mood</span>
     </p>
     <p class="hero-fa">کافه اُلا · <b>رضوانشهر</b></p>
     <div class="cup-wrap" aria-hidden="true">
@@ -235,7 +236,7 @@ footer{text-align:center;padding-block:56px 30px;display:grid;justify-items:cent
 
   <footer>
     <div class="ig"><span id="igh">@ola__cafee</span><button id="copy" type="button">کپی آیدی</button></div>
-    <p class="fine">اینستاگرام اُلا را دنبال کنید · Good Food Good Mood</p>
+    <p class="fine">اینستاگرام اُلا را دنبال کنید · Good Coffee, Good Mood</p>
     <p class="fine" id="updated"></p>
   </footer>
 </div>
@@ -276,7 +277,7 @@ let MENU = [], links = [], current = "";
 })();
 
 /* ===== ribbon ===== */
-$("ribbon").innerHTML = Array(2).fill(["Good Food", "Good Mood", "Ola Cafe", "Rezvanshahr", "Freshly Brewed"].map(t => `<span>${t}</span>`).join("")).join("");
+$("ribbon").innerHTML = Array(2).fill(["Good Coffee", "Good Mood", "Freshly Brewed", "Ola Cafe", "Rezvanshahr"].map(t => `<span>${t}</span>`).join("")).join("");
 
 /* ===== render ===== */
 function render(data){
