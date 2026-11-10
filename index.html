@@ -89,8 +89,22 @@ main,header,footer,section,nav{position:relative;z-index:2}
 .vintro .vmark .sm{fill:none;stroke:var(--gold);stroke-width:9;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
 .vintro.playing .vmark{animation:rise .8s var(--ease-out) forwards}
 .vintro.playing .vmark .sm{animation:draw .9s .25s var(--ease-io) forwards}
-.vintro p{position:absolute;left:0;right:0;bottom:calc(34px + env(safe-area-inset-bottom,0px));margin:0;text-align:center;font-family:var(--f-serif);font-style:italic;font-size:21px;color:var(--gold);direction:ltr;opacity:0}
-.vintro.playing p{animation:fade .9s 1.6s forwards}
+.vintro p{position:absolute;left:0;right:0;bottom:calc(34px + env(safe-area-inset-bottom,0px));margin:0;text-align:center;font-family:var(--f-serif);font-style:italic;font-size:23px;color:var(--gold);direction:ltr}
+.vintro p span{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(10px)}
+.vintro.playing p span{animation:word .9s var(--ease-out) forwards}
+.vintro.playing p span:nth-child(1){animation-delay:1.25s}.vintro.playing p span:nth-child(2){animation-delay:1.5s}
+.vintro.playing p span:nth-child(3){animation-delay:1.95s}.vintro.playing p span:nth-child(4){animation-delay:2.2s}
+@keyframes word{to{opacity:1;filter:blur(0);transform:none}}
+/* hand-off: the video melts away and the Ola mark glides into the seal on the page */
+.vintro.leaving{background:transparent;pointer-events:none;transition:background-color .7s ease}
+.vintro.leaving video,.vintro.leaving .vfade,.vintro.leaving .vbot,.vintro.leaving p,.vintro.leaving small{opacity:0!important;transition:opacity .5s ease}
+.vintro.leaving video{transition-duration:.38s}
+.vintro.leaving .vfade{transition:opacity .45s .3s ease}
+.vintro.leaving .vfade,.vintro.leaving .vbot,.vintro.leaving p,.vintro.leaving small{animation:none}
+body.handoff .seal .word,body.handoff .seal .smile{animation:none!important;opacity:0;transition:opacity .25s ease}
+body.handoff .seal .smile{stroke-dashoffset:0}
+body.handoff.landed .seal .word,body.handoff.landed .seal .smile{opacity:1}
+body.handoff.landed .seal .smile{animation:grin 7s 2s ease-in-out infinite!important}
 .vintro small{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:16px;font-size:12px;color:var(--muted);opacity:0}
 .vintro.playing small{animation:fade .6s 1.2s forwards}
 @media (min-aspect-ratio:3/4){
@@ -405,7 +419,7 @@ footer{text-align:center;padding-block:56px 20px;display:grid;justify-items:cent
   <div class="vfade"></div><div class="vbot"></div>
   <svg class="vmark" viewBox="0 0 220 150"><text class="w" x="110" y="96" text-anchor="middle" direction="ltr">Ola</text><path class="sm" pathLength="1" d="M62 112 Q110 150 158 112"/></svg>
   <small>برای رد شدن بزنید</small>
-  <p>Good Coffee, Good Mood</p>
+  <p><span>Good</span> <span>Coffee,</span> <span>Good</span> <span>Mood</span></p>
 </div>
 <div class="intro" id="intro" aria-hidden="true">
   <svg viewBox="0 0 200 220">
@@ -571,29 +585,51 @@ const $ = id => document.getElementById(id);
 const menu = $("menu"), chips = $("chips"), pill = $("pill");
 let MENU = [], links = [], current = "", ITEMS = new Map();
 
-/* ===== intro: once per visit =====
-   1) the real pour video (intro.webm / intro.mp4) if it starts within ~1.4s;
+/* ===== intro: plays every time the menu opens =====
+   1) the real pour video (intro.webm / intro.mp4) if it starts within ~1.4s; at the end the Ola mark glides into the seal;
    2) otherwise, on slow internet, data-saver or low-power mode, the drawn cup animation;
-   3) nothing at all for reduced motion or a second visit in the same session. */
+   3) nothing at all for people who turned on reduced motion. A tap skips either one. */
 (() => {
   const sp = $("intro"), vi = $("vintro"), v = $("introv");
-  let seen = false; try { seen = sessionStorage.getItem("ola-intro") === "1"; } catch (e) {}
   let finished = false;
-  const done = () => {
+  const release = () => { document.body.classList.remove("locked"); document.body.classList.add("ready"); };
+  const irisOut = () => {
     if (finished) return; finished = true;
     [sp, vi].forEach(el => el && el.isConnected && el.classList.add("out"));
-    document.body.classList.remove("locked"); document.body.classList.add("ready");
+    release();
     setTimeout(() => { sp.remove(); vi.remove(); }, 1000);
-    try { sessionStorage.setItem("ola-intro", "1"); } catch (e) {}
+  };
+  const handoff = () => {
+    if (finished) return;
+    const mark = vi.querySelector(".vmark"), w = mark && mark.querySelector(".w"), target = document.querySelector(".seal .word");
+    if (!w || !target || scrollY > 10) { irisOut(); return; }
+    finished = true;
+    const a = w.getBoundingClientRect(), b = target.getBoundingClientRect(), m = mark.getBoundingClientRect();
+    if (!a.height || !b.height) { finished = false; irisOut(); return; }
+    const k = b.height / a.height;
+    const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+    mark.style.animation = "none"; mark.style.opacity = "1";
+    mark.style.transformOrigin = `${a.left + a.width / 2 - m.left}px ${a.top + a.height / 2 - m.top}px`;
+    document.body.classList.add("handoff");
+    vi.classList.add("leaving");
+    release();
+    const fly = mark.animate([{transform: "none"}, {transform: `translate(${dx}px, ${dy}px) scale(${k})`}],
+      {duration: 950, easing: "cubic-bezier(.65,0,.25,1)", fill: "forwards"});
+    fly.finished.then(() => {
+      document.body.classList.add("landed");
+      mark.animate([{opacity: 1}, {opacity: 0}], {duration: 260, fill: "forwards"}).finished.then(() => vi.remove());
+    }).catch(() => vi.remove());
   };
   const drawn = () => {
     try { v.pause(); v.querySelectorAll("source").forEach(s => s.removeAttribute("src")); v.load(); } catch (e) {}
     vi.remove();
     sp.classList.add("run");
-    sp.addEventListener("click", done);
-    setTimeout(done, 2100);
+    sp.addEventListener("click", irisOut);
+    setTimeout(irisOut, 2100);
   };
-  if (reduce || seen) { sp.remove(); vi.remove(); document.body.classList.add("ready"); return; }
+  if (reduce) { sp.remove(); vi.remove(); document.body.classList.add("ready"); return; }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  scrollTo(0, 0);
   document.body.classList.add("locked");
   const c = navigator.connection || {};
   const slow = c.saveData || /(^|-)2g$/.test(c.effectiveType || "");
@@ -605,8 +641,8 @@ let MENU = [], links = [], current = "", ITEMS = new Map();
   v.addEventListener("playing", () => {
     if (started || finished || !vi.isConnected) return; started = true; clearTimeout(giveUp);
     sp.remove(); vi.classList.add("playing");
-    vi.addEventListener("click", done);
-    setTimeout(done, Math.min(((v.duration || 5) / v.playbackRate) * 1000 - 350, 5200));
+    vi.addEventListener("click", handoff);
+    setTimeout(handoff, Math.min(((v.duration || 5) / v.playbackRate) * 1000 - 300, 5200));
   }, {once:true});
   v.addEventListener("error", () => { if (!started) { clearTimeout(giveUp); drawn(); } }, true);
   v.defaultPlaybackRate = 1.1;
