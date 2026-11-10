@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-10T06:08:38.474Z",
+ "updated": "2026-11-10T12:00:00.000Z",
  "categories": [
   {
    "id": "hot",
@@ -15,7 +15,8 @@
      "m": [
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "اسپرسو عربیکا",
@@ -25,7 +26,8 @@
      "m": [
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "آمریکانو",
@@ -35,7 +37,8 @@
      "m": [
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "لاته",
@@ -45,7 +48,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "کورتادو",
@@ -55,7 +59,8 @@
      "m": [
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "موکا",
@@ -65,7 +70,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "کارامل ماکیاتو",
@@ -75,7 +81,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "کاپوچینو",
@@ -85,7 +92,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -104,7 +112,8 @@
       "energy",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "آیس لاته",
@@ -114,7 +123,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "آیس کارامل ماکیاتو",
@@ -125,7 +135,8 @@
       "cool",
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "آیس موکا",
@@ -136,7 +147,8 @@
       "cool",
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "آفوگاتو",
@@ -147,7 +159,8 @@
       "sweet",
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -166,7 +179,43 @@
       "sweet",
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
+    },
+    {
+     "n": "نسکافه",
+     "d": "",
+     "p": 210,
+     "tag": "",
+     "m": [
+      "energy",
+      "calm"
+     ],
+     "off": false,
+     "new": true
+    },
+    {
+     "n": "پینک چاکلت",
+     "d": "",
+     "p": 205,
+     "tag": "",
+     "m": [
+      "sweet",
+      "calm"
+     ],
+     "off": false,
+     "new": true
+    },
+    {
+     "n": "اُلا پُف",
+     "d": "ترکیب هات چاکلت و چی پف",
+     "p": 245,
+     "tag": "",
+     "m": [
+      "sweet"
+     ],
+     "off": false,
+     "new": true
     },
     {
      "n": "چای ماسالا",
@@ -176,7 +225,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "چای کَرَک",
@@ -186,7 +236,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "چای سیاه",
@@ -196,7 +247,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "اُلا پسته",
@@ -206,7 +258,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "دمنوش سیوان",
@@ -216,7 +269,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "دمنوش پالیزان",
@@ -226,7 +280,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "دمنوش ماهین",
@@ -236,7 +291,8 @@
      "m": [
       "calm"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -255,7 +311,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "نوتلا",
@@ -266,7 +323,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "لوتوس",
@@ -277,7 +335,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "اورئو",
@@ -288,7 +347,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "توت‌فرنگی",
@@ -299,7 +359,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "بادام‌زمینی",
@@ -310,7 +371,8 @@
       "sweet",
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -329,7 +391,8 @@
       "cool",
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "کارامل",
@@ -340,7 +403,8 @@
       "cool",
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "توت‌فرنگی",
@@ -351,7 +415,8 @@
       "cool",
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -369,7 +434,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "رد موهیتو",
@@ -379,7 +445,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "لیموناد",
@@ -389,7 +456,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "بلوهاوایی",
@@ -399,7 +467,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "رُزِلا",
@@ -409,7 +478,8 @@
      "m": [
       "cool"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -427,7 +497,8 @@
      "m": [
       "hungry"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "پنینی پپرونی",
@@ -437,7 +508,8 @@
      "m": [
       "hungry"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "اسنک ژامبون و پنیر",
@@ -447,7 +519,8 @@
      "m": [
       "hungry"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -465,7 +538,8 @@
      "m": [
       "hungry"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "سیب‌زمینی ویژه اُلا",
@@ -475,7 +549,8 @@
      "m": [
       "hungry"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -493,7 +568,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "وافل میوه‌ای با بستنی",
@@ -503,7 +579,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -521,7 +598,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "کوکی",
@@ -531,7 +609,8 @@
      "m": [
       "sweet"
      ],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "تیرامیسو",
@@ -542,7 +621,8 @@
       "sweet",
       "energy"
      ],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   },
@@ -558,7 +638,8 @@
      "p": 50,
      "tag": "",
      "m": [],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "خامه",
@@ -566,7 +647,8 @@
      "p": 70,
      "tag": "",
      "m": [],
-     "off": false
+     "off": false,
+     "new": false
     },
     {
      "n": "بستنی",
@@ -574,7 +656,8 @@
      "p": 90,
      "tag": "",
      "m": [],
-     "off": false
+     "off": false,
+     "new": false
     }
    ]
   }
